@@ -1,0 +1,31 @@
+/*
+* REDUCTION HEADER OF COURSES LIST PAGES
+*/
+.list-unstyled.list-inline.header-second-nav{
+    display: flex !important;
+}
+
+.header-second-infos{
+    flex-grow: 0 !important;
+    margin-top: 0 !important;
+    display: inline-flex !important;
+    align-items: center !important;
+}
+
+.header-second-inner{
+    padding-top: 5px !important;
+    height: auto !important;
+}
+
+.header-second{
+    height: auto !important;
+}
+
+.cursus-header-title{
+	margin-right: 30px !important;
+}
+
+.course-details{
+    margin: 10px 0 !important;
+}
+	

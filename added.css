@@ -1,0 +1,52 @@
+.active{
+    display: block !important;
+}
+
+#hover-summary{
+    width: auto;
+    height: auto;
+    z-index: 1;
+    border: #0075b4 solid 1px;
+    border-radius: 0.1875rem;
+    display: none;
+    position: absolute;
+    top:116px;
+    background-color: white;
+}
+
+#hover-summary:hover{
+    display: block;
+}
+
+body{
+    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+
+}
+
+a{
+    color: #0075b4;
+    text-decoration: none;
+    background-color: transparent;
+}
+
+ol{
+    padding: 0 10px;
+}
+
+li.summary{
+    list-style-type: decimal;
+    padding: 5px;
+    margin-left: 25px;
+}
+
+li:hover{
+    background-color: #dadada;
+}
+
+.custom.fa.fa-check{
+    float: right;
+    color: green;
+}

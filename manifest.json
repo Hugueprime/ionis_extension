@@ -1,0 +1,18 @@
+{
+    "manifest_version": 2,
+    "name": "epita",
+    "version": "0.1.0",
+    "content_scripts":[
+        {
+            "matches":[
+                "https://ionisx.com/courses/*",
+                "https://courses.ionisx.com/*"
+            ],
+            "js": ["content.js", "config.js"],
+            "css":["added.css", "changed.css"]
+        }
+    ],
+    "browser_action":{
+        "default_icon": "./icons/icon32.png"
+    }
+}
