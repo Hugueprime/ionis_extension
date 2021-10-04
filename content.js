@@ -8,9 +8,44 @@ if(coursesList.test(window.location.href)){
 	*/
 	document.getElementsByClassName("header-second-infos")[0].prepend(document.getElementsByClassName("cursus-header-title")[0])
 
-
-
-
+	/*
+	* DATES MODULES
+	*/
+	const options = { month: 'short', day: 'numeric'};
+	console.log(window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)\//)[1])
+	switch (window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)\//)[1]) {
+		case "epita-maths-s1":
+			console.log("in")
+			for(let k in dates.epita_maths_s1){
+				let module = document.getElementsByClassName("module-number")[k].parentElement;
+				let span = document.createElement("span");
+				let date = dates.epita_maths_s1[k];
+				span.classList.add("dateToDo");
+				span.innerHTML = `${date.start.toLocaleDateString('fr-FR', options)} to ${date.end.toLocaleDateString('fr-FR', options)}`;
+				let today = new Date;
+				if(module.parentElement.parentElement.classList.contains("course-component-module-finished")){ //done
+					span.classList.add("customDoneWeek")
+				}else{
+					if (today.getTime() > date.end.getTime()) { //past week
+						span.classList.add("customPastWeek")
+					}else if (date.start.getTime() < today.getTime() && today.getTime() < date.end.getTime()){ //current week
+						span.classList.add("customActualWeek")
+					}else{
+						today.setDate(today.getDate() + 7);//next week
+						if(date.start.getTime() < today.getTime() && today.getTime() < date.end.getTime()){//next week
+							span.classList.add("customNextWeek")
+						}else{ //futur week
+							span.classList.add("customFuturWeek")
+						}
+					}
+				}
+				module.appendChild(span);
+			}
+			break;
+	
+		default:
+			break;
+	}
 
 }
 
@@ -33,23 +68,23 @@ if(inCourse.test(window.location.href)){
 	function mouseSummaryButton(e){
 		let hoverSummary = document.getElementById("hover-summary");
 		if(hoverSummary){
-			if(!hoverSummary.classList.contains("active") && e.type == "mouseover"){
-				hoverSummary.classList.add("active");
-			}else if(hoverSummary.classList.contains("active") && e.type == "mouseout"){
-				hoverSummary.classList.remove("active");
+			if(!hoverSummary.classList.contains("activeCust") && e.type == "mouseover"){
+				hoverSummary.classList.add("activeCust");
+			}else if(hoverSummary.classList.contains("activeCust") && e.type == "mouseout"){
+				hoverSummary.classList.remove("activeCust");
 			}
 		}else{
 			let div = document.createElement('div');
 			div.id = "hover-summary";
-			div.classList.add("active");
+			div.classList.add("activeCust");
 			let summaryList = "<ol>";
 			summaryButton.parentElement.append(div);
 			fetchSummary().then(liste => {
 				for(let k in liste){
 					console.log(liste)
-					let valid = ""
+					let valid = '<span class="custom fa-uncheck"></span>'
 					if (liste[k].valid) valid = '<span class="custom fa fa-check"></span>';
-					summaryList += `<li class="summary"><a href="${liste[k].link}" target="_blank">${liste[k].name}</a>${valid}</li>`;
+					summaryList += `<li class="summary"><a href="${liste[k].link}">${liste[k].name}</a>${valid}</li>`;
 				}
 				summaryList += "</ol>";
 				div.innerHTML = summaryList;
@@ -123,4 +158,6 @@ if(inCourse.test(window.location.href)){
 		})
 	}
 }
+
+
 

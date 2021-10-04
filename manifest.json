@@ -8,7 +8,7 @@
                 "https://ionisx.com/courses/*",
                 "https://courses.ionisx.com/*"
             ],
-            "js": ["content.js", "config.js"],
+            "js": ["config.js", "dates.js", "content.js"],
             "css":["added.css", "changed.css"]
         }
     ],

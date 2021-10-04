@@ -1,4 +1,4 @@
-.active{
+.activeCust{
     display: block !important;
 }
 
@@ -18,13 +18,7 @@
     display: block;
 }
 
-body{
-    font-family: "Open Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
 
-}
 
 a{
     color: #0075b4;
@@ -46,7 +40,39 @@ li:hover{
     background-color: #dadada;
 }
 
-.custom.fa.fa-check{
+.custom.fa.fa-check, .custom.fa-uncheck{
     float: right;
+    width: 16px;
+    height: 16px;
     color: green;
+    margin: 0 4px;
+}
+
+/*
+* DATES TODO
+*/
+
+.dateToDo{
+    float: right;
+    margin-right: 10px;
+}
+
+.customDoneWeek{
+    color:rgb(6, 124, 2);
+}
+
+.customPastWeek{
+    color:rgb(226, 21, 21);
+}
+
+.customActualWeek{
+    color:rgb(196, 28, 196);
+}
+
+.customNextWeek{
+    color:rgb(108, 78, 216);
+}
+
+.customFuturWeek{
+    color:rgb(105, 100, 100);
 }
