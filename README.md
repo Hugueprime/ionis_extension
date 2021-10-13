@@ -10,7 +10,7 @@
 
 ### Add the extension
 1. Download this repo
-2. Go to [chrome://extensions](chrome://extensions) and enable "developer mode"
+2. Go to `chrome://extensions` and enable "developer mode"
 3. Load unpacked extension and select the directory where you downloaded the repo
 
 ### Connect to ionisx

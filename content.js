@@ -12,15 +12,10 @@ if(coursesList.test(window.location.href)){
 	* DATES MODULES
 	*/
 	const options = { month: 'short', day: 'numeric'};
-	switch (window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1]) {
-		case "epita-maths-s1":
-			addDates("epita_maths_s1")
-			break;
-		case 'epita-algorithmique-s1-et-s1':
-			addDates("epita_algorithmique_s1_et_s1")
-			break;
-		default:
-			break;
+	let coursesList = window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1].replaceAll('-', '_');
+	console.log(coursesList)
+	if(dates[coursesList]){
+		addDates(coursesList)
 	}
 
 	function addDates(section){
@@ -121,13 +116,11 @@ if(inCourse.test(window.location.href)){
 					let nameValid = title[0].replace(/<h4 class="subsection-title"> [\s]* ([\w \u00C0-\u00FF \-:,’\&#39;]*) <\/h4> [\s]* /, '$1')
 					.replace(/[\s]{2,}/g," ")
 					.replace("&#39;", "'");
-					let valid = false;
-					if( nameValid.includes('<span class="complete-checkmark fa fa-check"></span>')) valid = true
 
 					response.push({
-						name: nameValid.replace(/([\w \u00C0-\u00FF \-:,’']*).*/, "$1").slice(0,-1),
-						valid: valid,
-						link:""
+						name: nameValid.replace(/([\w \u00C0-\u00FF \-:,’']*).*/, "$1").slice(0,-1), //title of part
+						valid: nameValid.includes('<span class="complete-checkmark fa fa-check"></span>'), //part done
+						link:"" //part link
 					})
 				}
 
