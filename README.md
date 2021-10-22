@@ -1,3 +1,5 @@
+*pull request and ideas are welcome*
+
 ## What does it do ?
 * Design
     * Fixe position of course timeline aside
