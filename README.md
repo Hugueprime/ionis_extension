@@ -4,7 +4,7 @@
     * Reduce header height in courses list
 * Functionalities
   * Summary at flyover in a course
-  * To do date for each module
+  * To do date for each module (hard coded)
 
 ## Make it work
 
@@ -15,4 +15,11 @@
 
 ### Connect to ionisx
 In order to the extension to fetch the summary, it need the ionisx token.
-Create `./config.js` on the model of `./config.sample.js` and complete missing values with yours. You can find them in  [ionisx](https://ionisx.com) > dev tools > application > cookies > https://ionisx.com
+
+You can find them in  [ionisx](https://ionisx.com) > dev tools > application > cookies > https://ionisx.com
+
+If you have the extension from source you can :
+
+Create `./config.js` on the model of `./config.sample.js` and complete missing values with yours. 
+
+If you have the extension from the store you have the graphical interface.

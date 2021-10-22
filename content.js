@@ -1,4 +1,15 @@
 
+if(ionisx_sid == ""){
+	chrome.storage.local.get(['ionisx_sid'], function(res) {
+		ionisx_sid = res.ionisx_sid ?? "";
+	});
+	chrome.storage.local.get(['ionisx_edxlms'], function(res) {
+		ionisx_edxlms = res.ionisx_edxlms ?? "";
+	});
+
+}
+// console.log(localStorage.getItem("ionisx_edxlms"))
+// console.log(localStorage.getItem("ionisx_sid"))
 
 let coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
 if(coursesList.test(window.location.href)){
@@ -65,31 +76,35 @@ if(inCourse.test(window.location.href)){
 
 
 	function mouseSummaryButton(e){
-		let hoverSummary = document.getElementById("hover-summary");
-		if(hoverSummary){
-			if(!hoverSummary.classList.contains("activeCust") && e.type == "mouseover"){
-				hoverSummary.classList.add("activeCust");
-			}else if(hoverSummary.classList.contains("activeCust") && e.type == "mouseout"){
-				hoverSummary.classList.remove("activeCust");
-			}
-		}else{
-			let div = document.createElement('div');
-			div.id = "hover-summary";
-			div.classList.add("activeCust");
-			let summaryList = "<ol>";
-			summaryButton.parentElement.append(div);
-			fetchSummary().then(liste => {
-				for(let k in liste){
-					console.log(liste)
-					let valid = '<span class="custom fa-uncheck"></span>'
-					if (liste[k].valid) valid = '<span class="custom fa fa-check"></span>';
-					summaryList += `<li class="summary"><a href="${liste[k].link}">${liste[k].name}</a>${valid}</li>`;
+			let hoverSummary = document.getElementById("hover-summary");
+			if(hoverSummary){
+				if(!hoverSummary.classList.contains("activeCust") && e.type == "mouseover"){
+					hoverSummary.classList.add("activeCust");
+				}else if(hoverSummary.classList.contains("activeCust") && e.type == "mouseout"){
+					hoverSummary.classList.remove("activeCust");
 				}
-				summaryList += "</ol>";
-				div.innerHTML = summaryList;
-			})
-
-		}
+			}else{
+				let div = document.createElement('div');
+				div.id = "hover-summary";
+				div.classList.add("activeCust");
+				let summaryList = "<ol>";
+				summaryButton.parentElement.append(div);
+				if(ionisx_edxlms != "" && ionisx_sid != ""){
+					fetchSummary().then(liste => {
+						for(let k in liste){
+							console.log(liste)
+							let valid = '<span class="custom fa-uncheck"></span>'
+							if (liste[k].valid) valid = '<span class="custom fa fa-check"></span>';
+							summaryList += `<li class="summary"><a href="${liste[k].link}">${liste[k].name}</a>${valid}</li>`;
+						}
+						summaryList += "</ol>";
+						div.innerHTML = summaryList;
+					})
+				}else{
+					div.innerHTML = '<label style="font-size: 12px;margin: 2px;">error with ionisx_edxlms and ionis_sid keys</label>';
+				}
+	
+			}
 
 	}
 
