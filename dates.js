@@ -19,9 +19,9 @@ var dates = {
         {"start": new Date('2021-10-11'), "end": new Date('2021-10-17')},
         {"start": new Date('2021-10-18'), "end": new Date('2021-10-24')},
         {"start": new Date('2021-10-25'), "end": new Date('2021-10-31')},
-        {"start": new Date('2021-10-25'), "end": new Date('2021-10-31')},//20
+        {"start": new Date('2021-11-15'), "end": new Date('2021-11-21')},//20
         {"start": new Date('2021-11-15'), "end": new Date('2021-11-21')},
-        {"start": new Date('2021-11-15'), "end": new Date('2021-11-21')},
+        {"start": new Date('2021-11-25'), "end": new Date('2021-11-31')},
         {"start": new Date('2021-11-15'), "end": new Date('2021-11-21')},
         {"start": new Date('2021-11-22'), "end": new Date('2021-11-28')},
         {"start": new Date('2021-11-22'), "end": new Date('2021-11-28')},//25
