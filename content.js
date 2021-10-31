@@ -1,4 +1,5 @@
 
+//getting ionisx's key from file or localstorage
 if(ionisx_sid == ""){
 	chrome.storage.local.get(['ionisx_sid'], function(res) {
 		ionisx_sid = res.ionisx_sid ?? "";
@@ -8,8 +9,7 @@ if(ionisx_sid == ""){
 	});
 
 }
-// console.log(localStorage.getItem("ionisx_edxlms"))
-// console.log(localStorage.getItem("ionisx_sid"))
+
 
 let coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
 if(coursesList.test(window.location.href)){

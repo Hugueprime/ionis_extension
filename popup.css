@@ -29,16 +29,18 @@ section{
     flex-direction: column;
 }
 
-h3.title{
+.title{
     position: relative;
     margin: 0px;
-    margin-top: -15px;
+    margin-top: -17px;
+    width: fit-content;
 }
 
-h3.title > a{
+a, h3, h4{
     background-color: var(--background-color);
     text-decoration: none;
-    color:  var(--title-color) ;
+    color:  var(--title-color);
+    padding: 2px;
 }
 
 a:hover {
@@ -47,6 +49,10 @@ a:hover {
 
 label, button{
     color: var(--text-color);
+}
+
+label{
+    width: fit-content;
 }
 
 button{
@@ -85,3 +91,14 @@ button:hover{
     margin-bottom: -8px;
     color: white;
 }
+
+
+.links-global{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.inline{
+    display: inline-block;
+}
+

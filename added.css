@@ -1,3 +1,6 @@
+/*
+* Summary design
+*/
 .activeCust{
     display: block !important;
 }
@@ -17,8 +20,6 @@
 #hover-summary:hover{
     display: block;
 }
-
-
 
 a{
     color: #0075b4;
