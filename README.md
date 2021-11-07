@@ -4,6 +4,7 @@
 * Design
   * Fixe position of course timeline aside
   * Reduce header height in courses list
+  * Reduce size of courses presentation
 * Functionalities
   * Summary at flyover in a course
   * To do date for each module (hard coded)
