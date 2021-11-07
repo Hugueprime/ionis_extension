@@ -51,6 +51,10 @@ label, button{
     color: var(--text-color);
 }
 
+input:invalid{
+    border: 2px solid var(--second-dark);
+}
+
 label{
     width: fit-content;
 }

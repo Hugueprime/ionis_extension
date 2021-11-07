@@ -2,11 +2,12 @@
 
 ## What does it do ?
 * Design
-    * Fixe position of course timeline aside
-    * Reduce header height in courses list
+  * Fixe position of course timeline aside
+  * Reduce header height in courses list
 * Functionalities
   * Summary at flyover in a course
   * To do date for each module (hard coded)
+  * Change the default video player of a course (adapted from [IONISxBetterVideo](https://github.com/Tim-xD/IONISxBetterVideo))
 
 ## Make it work
 

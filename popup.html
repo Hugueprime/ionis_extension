@@ -6,7 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" type="text/css" href="popup.css">
     <link rel="stylesheet" type="text/css" href="switch.css">
+    <script defer src="global_var.js"></script>
     <script defer src="popup.js"></script>
+
 
 </head>
 
@@ -32,7 +34,7 @@
                 </label>
                 <label>with this client :</label>
             </span>
-            <input type="text" placeholder="invidious.kavin.rocks (default)" />
+            <input type="text" id="instanceVideoPlayer" pattern="([a-zA-Z0-9]{1,61}\.)?[a-zA-Z0-9-]{1,61}[a-zA-Z0-9]\.[a-zA-Z]{2,}"/>
         </section>
     </section>
     <br>
@@ -52,7 +54,10 @@
 
     
 
+    <span class="inline" style="margin-top: 5px;">
         <span class="version">v0.0.1</span>
+        <a class="link" href="https://github.com/Hugueprime/ionis_extension">Project's repo</a>
+    </span>
 
 </body>
 

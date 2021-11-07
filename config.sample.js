@@ -1,3 +1,3 @@
 //cookie to get in dev tools
-var ionisx_sid = "";
-var ionisx_edxlms = "";
+const ionisx_sid = "";
+const ionisx_edxlms = "";

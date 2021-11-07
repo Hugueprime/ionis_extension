@@ -7,8 +7,9 @@ if(ionisx_sid == ""){
 	chrome.storage.local.get(['ionisx_edxlms'], function(res) {
 		ionisx_edxlms = res.ionisx_edxlms ?? "";
 	});
-
 }
+
+
 
 
 let coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
@@ -109,7 +110,7 @@ if(inCourse.test(window.location.href)){
 	}
 
 
-
+	//fetch summary and getting title, links and complete mark
 	function fetchSummary(){
 		//referer cookie fetch
 		return new Promise(function(resolve, reject){
@@ -122,29 +123,25 @@ if(inCourse.test(window.location.href)){
 			.then (res2 => {
 					
 				let res3 = res2.replace(/(\r\n|\n|\r)/gm," ");
-				let titleRegex = /<h4 class="subsection-title"> [\s]* ([\w \u00C0-\u00FF \-:,’\&#39;]*)<\/h4>[\s]*(<span class="complete-checkmark fa fa-check"><\/span>)?/g
-
-				// let titleRegex = / <h4 class=\"subsection-title\"> [\s]* ([\w \u00C0-\u00FF \-\&#39;]*) <\/h4> [\s]* (<span )? /g;
-				let titles = res3.matchAll(titleRegex);
 				let response = [];
-				for (const title of titles) {
-					let nameValid = title[0].replace(/<h4 class="subsection-title"> [\s]* ([\w \u00C0-\u00FF \-:,’\&#39;]*) <\/h4> [\s]* /, '$1')
-					.replace(/[\s]{2,}/g," ")
-					.replace("&#39;", "'");
 
+				if(/You must be enrolled in the course to see course content/.test(res3)){
 					response.push({
-						name: nameValid.replace(/([\w \u00C0-\u00FF \-:,’']*).*/, "$1").slice(0,-1), //title of part
-						valid: nameValid.includes('<span class="complete-checkmark fa fa-check"></span>'), //part done
-						link:"" //part link
+						name: "It seems that your cookies have expired",
+						valid: false,
+						link: ""
 					})
-				}
-
-				let linkRegex = /https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*/g;
-				let links = res3.matchAll(linkRegex);
-				let k = 0;
-				for (const link of links) {
-					response[k].link = link[0]
-					k++
+				}else{
+					let titleRegex = /<h4 class="subsection-title">[\s]*(.*?)[\s]*<\/h4>.*?(<span class="complete-checkmark fa fa-check"><\/span>|div).*?(https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*)/g
+			
+					let datas = [...res3.matchAll(titleRegex)];
+					datas.forEach(elt => {
+						  response.push({
+							name: elt[1].replace("&#39;", "'"),
+							valid: (elt[2] == "div" ? false : true),
+							link:elt[3].replace("&#39;", "'")
+						  });
+					});
 				}
 	
 				resolve(response);
@@ -154,4 +151,59 @@ if(inCourse.test(window.location.href)){
 }
 
 
+/*
+* CHANGE MEDIA PLAYER IN IONISX
+*/
+const removeElements = (elms) => elms.forEach(el => el.remove()); //delete all elements
+
+
+function waitForIFrame(i, callBack) { //wait for the iframe to load
+    window.setTimeout(() => {
+        let element = document.getElementsByTagName("iframe")[i];
+        if (element) {
+            callBack(i, element);
+        } else {
+            waitForIFrame(i, callBack);
+        }
+    }, 100)
+}
+
+chrome.storage.local.get([activeVideoPlayerState], function(active){
+	if(active[activeVideoPlayerState]){
+		console.log("is active")
+		chrome.storage.local.get([INSTANCE_VIDEO], function(result){
+			const instance = result[INSTANCE_VIDEO] ?? DEFAULT_VIDEO_PLAYER;
+			
+			let n = document.getElementsByTagName("iframe").length; //number of iframe
+			console.log(n)
+			for (let i = 0; i < n; i++) {
+				waitForIFrame(i, function () {
+					try {
+						let el = document.getElementsByTagName("iframe")[i];
+						console.log(el)
+						let video = el.src;
+						console.log(video)
+						if (video.includes("www.youtube.com")) {
+							let newvideo = video.substring(0, video.indexOf('?')).replace("www.youtube.com", instance);
+							el.src = newvideo;
+							console.log(newvideo)
+							let size = document.getElementsByClassName("video-player")[i].scrollWidth;
+							el.width = size;
+							el.height = size / 16 * 9;
+							
+							//remove things from old iframe
+							removeElements(document.querySelectorAll(".video-controls"));
+							removeElements(document.querySelectorAll(".spinner"));
+						}
+					} catch (e) {
+						console.log(e)
+					}
+				});
+			}
+		})
+	}else{
+		console.log(active[activeVideoPlayerState])
+	}
+
+})
 
