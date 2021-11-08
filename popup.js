@@ -9,7 +9,7 @@ function addTextLocalStorage(nameKey){
     if(input.value == ''){
         input.focus();
     }else{
-        chrome.storage.local.set({[nameKey]: input.value}, function() {});//set local
+        browser.storage.local.set({[nameKey]: input.value}, function() {});//set local
         input.value = '';
     }
 }
@@ -17,23 +17,23 @@ function addTextLocalStorage(nameKey){
 //listener link
 for(let k = 0; k < document.getElementsByClassName("link").length; k++){
     document.getElementsByClassName("link")[k].addEventListener('click', function(e) {
-        chrome.tabs.create({active: true, url: e.target.href});
+        browser.tabs.create({active: true, url: e.target.href});
     })
 }
 
 //switch video player
 const activeVideoPlayerElt = "activeVideoPlayer"
-chrome.storage.local.get([activeVideoPlayerState], function(result){
+browser.storage.local.get([activeVideoPlayerState], function(result){
     document.getElementById(activeVideoPlayerElt).checked = result[activeVideoPlayerState] ?? false;
 })
 document.getElementById(activeVideoPlayerElt).addEventListener("click", function(){
     let switchState = document.getElementById(activeVideoPlayerElt).checked
     updateStorage(activeVideoPlayerState, switchState)
-    chrome.runtime.sendMessage({type:"reloadVideoPlayer"}, function(){}) //reload background to block request
+    browser.runtime.sendMessage({type:"reloadVideoPlayer"}, function(){}) //reload background to block request
 })
 
 //init component
-chrome.storage.local.get([INSTANCE_VIDEO], function(result){
+browser.storage.local.get([INSTANCE_VIDEO], function(result){
     document.getElementById("instanceVideoPlayer").value = result[INSTANCE_VIDEO] || ""
 })
 
@@ -41,11 +41,11 @@ document.getElementById("instanceVideoPlayer").placeholder = `${DEFAULT_VIDEO_PL
 
 
 function updateStorage(nameKey, value){
-    chrome.storage.local.set({[nameKey]: value}, function() {});//set local
+    browser.storage.local.set({[nameKey]: value}, function() {});//set local
 }
 
 function deleteStorage(nameKey){
-    chrome.storage.local.remove([nameKey], function() {});
+    browser.storage.local.remove([nameKey], function() {});
 }
 
 //change server video player

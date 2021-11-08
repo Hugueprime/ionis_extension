@@ -33,7 +33,7 @@ section{
     position: relative;
     margin: 0px;
     margin-top: -17px;
-    width: fit-content;
+    width: -moz-max-content;
 }
 
 a, h3, h4{
@@ -106,3 +106,6 @@ button:hover{
     display: inline-block;
 }
 
+.subSection{
+    margin-top: 15px;
+}
