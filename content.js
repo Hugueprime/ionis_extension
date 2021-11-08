@@ -1,10 +1,10 @@
 
 //getting ionisx's key from file or localstorage
 if(ionisx_sid == ""){
-	chrome.storage.local.get(['ionisx_sid'], function(res) {
+	browser.storage.local.get(['ionisx_sid'], function(res) {
 		ionisx_sid = res.ionisx_sid ?? "";
 	});
-	chrome.storage.local.get(['ionisx_edxlms'], function(res) {
+	browser.storage.local.get(['ionisx_edxlms'], function(res) {
 		ionisx_edxlms = res.ionisx_edxlms ?? "";
 	});
 }
@@ -168,10 +168,10 @@ function waitForIFrame(i, callBack) { //wait for the iframe to load
     }, 100)
 }
 
-chrome.storage.local.get([activeVideoPlayerState], function(active){
+browser.storage.local.get([activeVideoPlayerState], function(active){
 	if(active[activeVideoPlayerState]){
 		console.log("is active")
-		chrome.storage.local.get([INSTANCE_VIDEO], function(result){
+		browser.storage.local.get([INSTANCE_VIDEO], function(result){
 			const instance = result[INSTANCE_VIDEO] ?? DEFAULT_VIDEO_PLAYER;
 			
 			let n = document.getElementsByTagName("iframe").length; //number of iframe
