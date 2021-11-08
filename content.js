@@ -9,7 +9,6 @@ if(ionisx_sid == ""){
 	});
 }
 
-//test
 
 
 let coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
