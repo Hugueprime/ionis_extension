@@ -11,7 +11,7 @@ if(ionisx_sid == ""){
 
 
 
-let coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
+const coursesList = new RegExp(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}/);
 if(coursesList.test(window.location.href)){
 
 	/*
@@ -23,20 +23,20 @@ if(coursesList.test(window.location.href)){
 	* DATES MODULES
 	*/
 	const options = { month: 'short', day: 'numeric'};
-	let coursesList = window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1].replaceAll('-', '_');
+	const coursesList = window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1].replaceAll('-', '_');
 	console.log(coursesList)
 	if(dates[coursesList]){
 		addDates(coursesList)
 	}
 
 	function addDates(section){
-		for(let k in dates[section]){
-			let module = document.getElementsByClassName("module-number")[k].parentElement;
-			let span = document.createElement("span");
-			let date = dates[section][k];
+		for(const k in dates[section]){
+			const module = document.getElementsByClassName("module-number")[k].parentElement;
+			const span = document.createElement("span");
+			const date = dates[section][k];
 			span.classList.add("dateToDo");
 			span.innerHTML = `${date.start.toLocaleDateString('fr-FR', options)} to ${date.end.toLocaleDateString('fr-FR', options)}`;
-			let today = new Date;
+			const today = new Date;
 			if(module.parentElement.parentElement.classList.contains("course-component-module-finished")){ //done
 				span.classList.add("customDoneWeek")
 			}else{
@@ -59,12 +59,12 @@ if(coursesList.test(window.location.href)){
 
 }
 
-let inCourse = new RegExp(/https:\/\/courses\.ionisx\.com\/courses\/ref/);
+const inCourse = new RegExp(/https:\/\/courses\.ionisx\.com\/courses\/ref/);
 if(inCourse.test(window.location.href)){
 	/*
 	* SHOW SUMMARY ON HOVER
 	*/
-	let summaryButton = document.getElementById('expand-collapse-outline-all-button');
+	const summaryButton = document.getElementById('expand-collapse-outline-all-button');
 	
 
 	summaryButton.addEventListener('mouseover', function(e){
@@ -76,7 +76,7 @@ if(inCourse.test(window.location.href)){
 
 
 	function mouseSummaryButton(e){
-			let hoverSummary = document.getElementById("hover-summary");
+			const hoverSummary = document.getElementById("hover-summary");
 			if(hoverSummary){
 				if(!hoverSummary.classList.contains("activeCust") && e.type == "mouseover"){
 					hoverSummary.classList.add("activeCust");
@@ -84,7 +84,7 @@ if(inCourse.test(window.location.href)){
 					hoverSummary.classList.remove("activeCust");
 				}
 			}else{
-				let div = document.createElement('div');
+				const div = document.createElement('div');
 				div.id = "hover-summary";
 				div.classList.add("activeCust");
 				let summaryList = "<ol>";
@@ -113,7 +113,7 @@ if(inCourse.test(window.location.href)){
 	function fetchSummary(){
 		//referer cookie fetch
 		return new Promise(function(resolve, reject){
-			let course = window.location.href.match(/https:\/\/courses\.ionisx\.com\/courses\/ref\/(m[0-9]{1,5})\//)[1];
+			const course = window.location.href.match(/https:\/\/courses\.ionisx\.com\/courses\/ref\/(m[0-9]{1,5})\//)[1];
 			fetch(`https://courses.ionisx.com/courses/ref/${course}/x/course/`, {
 				"headers": {
 					"Cookie": `ionisx-sid=${ionisx_sid}; ionisx.edxlms="${ionisx_edxlms}"`
@@ -121,7 +121,7 @@ if(inCourse.test(window.location.href)){
 			}) .then(res => res.text())
 			.then (res2 => {
 					
-				let res3 = res2.replace(/(\r\n|\n|\r)/gm," ");
+				const res3 = res2.replace(/(\r\n|\n|\r)/gm," ");
 				let response = [];
 
 				if(/You must be enrolled in the course to see course content/.test(res3)){
@@ -131,9 +131,9 @@ if(inCourse.test(window.location.href)){
 						link: ""
 					})
 				}else{
-					let titleRegex = /<h4 class="subsection-title">[\s]*(.*?)[\s]*<\/h4>.*?(<span class="complete-checkmark fa fa-check"><\/span>|div).*?(https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*)/g
+					const titleRegex = /<h4 class="subsection-title">[\s]*(.*?)[\s]*<\/h4>.*?(<span class="complete-checkmark fa fa-check"><\/span>|div).*?(https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*)/g
 			
-					let datas = [...res3.matchAll(titleRegex)];
+					const datas = [...res3.matchAll(titleRegex)];
 					datas.forEach(elt => {
 						  response.push({
 							name: elt[1].replace("&#39;", "'"),
