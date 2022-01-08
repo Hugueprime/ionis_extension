@@ -141,7 +141,7 @@ function main(){
 				let course = window.location.href.match(/https:\/\/courses\.ionisx\.com\/courses\/ref\/(m[0-9]{1,5})\//)[1];
 				fetch(`https://courses.ionisx.com/courses/ref/${course}/x/course/`, {
 					"headers": {
-						"Cookie": `ionisx-sid=jij; ionisx.edxlms="gergre"`
+						"Cookie": `ionisx-sid=${ionisx_sid}; ionisx.edxlms="${ionisx_edxlms}"`
 					}
 				}) .then(res => res.text())
 				.then (res2 => {
