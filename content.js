@@ -4,7 +4,7 @@ function init(){
 
 		let flag = false;
 		//getting ionisx's key from file or localstorage
-		if(ionisx_sid == ""){
+		if(ionisx_sid == "null"){
 			browser.storage.local.get(['ionisx_sid'], function(res) {
 				ionisx_sid = res.ionisx_sid ?? "";
 				if(flag){
@@ -115,7 +115,6 @@ function main(){
 					let summaryList = "<ol>";
 					summaryButton.parentElement.append(div);
 					
-					if(ionisx_edxlms != "" && ionisx_sid != ""){
 						fetchSummary().then(liste => {
 							for(let k in liste){
 								console.log(liste)
@@ -126,9 +125,7 @@ function main(){
 							summaryList += "</ol>";
 							div.innerHTML = summaryList;
 						})
-					}else{
-						div.innerHTML = '<label style="font-size: 12px;margin: 2px;">error with ionisx_edxlms and ionis_sid keys</label>';
-					}
+				
 		
 				}
 	
