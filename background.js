@@ -4,7 +4,7 @@
 const filter = {
     urls: ["*://www.youtube.com/*"]
 };
-let webRequestFlags = ["blocking"];
+const webRequestFlags = ["blocking"];
 
 
 function blockYoutube (){
@@ -12,19 +12,14 @@ function blockYoutube (){
         console.log("blocking")
 
         chrome.storage.local.get([INSTANCE_VIDEO], function(result2){
-            let instance = result2[INSTANCE_VIDEO] || DEFAULT_VIDEO_PLAYER;
+            const instance = result2[INSTANCE_VIDEO] || DEFAULT_VIDEO_PLAYER;
 
 
-            function blockYt(){
+            function blockYt (){
                 chrome.tabs.query({ active: true, currentWindow: true }, function(tabs){
-                    let isIonisX = tabs[0].url.includes("ionisx.com");
-                    let isInstanceYt = instance.includes("www.youtube.com")
-
-                    if(isIonisX && !isInstanceYt){ //if is on ionisx and instance isn't youtube
-                            return {cancel: true};
-                    }else{
-                            return {cancel: false};
-                    }
+                    const isIonisX = tabs[0].url.includes("ionisx.com");
+                    const isInstanceYt = instance.includes("www.youtube.com")
+                    return { cancel: isIonisX && !isInstanceYt };//if is on ionisx and instance isn't youtube
                 });
             }
             
@@ -34,7 +29,7 @@ function blockYoutube (){
                     filter,
                     webRequestFlags)
             }
-            else if(chrome.webRequest.onBeforeRequest.hasListener(blockYt)){ //stop listener is there is (case where setting changes)
+            else{ //stop listener is there is (case where setting changes)
                 chrome.webRequest.onBeforeRequest.removeListener(blockYt)
             }
             
@@ -46,13 +41,8 @@ blockYoutube();
 
 //wait for message
 chrome.runtime.onMessage.addListener(function(request, sender, sendResponse) { 
-    switch (request.type) {
-        case "reloadVideoPlayer": //message coming from popup that video player state has changed
+    if (request.type == "reloadVideoPlayer") {//message coming from popup that video player state has changed
             blockYoutube ();
-            break;
-    
-        default:
-            break;
     }
     sendResponse({status: true});
 })
