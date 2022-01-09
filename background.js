@@ -15,11 +15,12 @@ function blockYoutube (){
             let instance = result2[INSTANCE_VIDEO] || DEFAULT_VIDEO_PLAYER;
 
 
-            function blockYt(){
+            function blockYt(page){
                 browser.tabs.query({ active: true, currentWindow: true }, function(tabs){
                     let isIonisX = tabs[0].url.includes("ionisx.com");
                     let isInstanceYt = instance.includes("www.youtube.com")
 
+                    
                     if(isIonisX && !isInstanceYt){ //if is on ionisx and instance isn't youtube
                             return {cancel: true};
                     }else{
@@ -27,14 +28,14 @@ function blockYoutube (){
                     }
                 });
             }
-            
+      
             if(result[activeVideoPlayerState]){ //is alternative video player active
                 browser.webRequest.onBeforeRequest.addListener(
                     blockYt,
                     filter,
                     webRequestFlags)
             }
-            else if(browser.webRequest.onBeforeRequest.hasListener(blockYt)){ //stop listener is there is (case where setting changes)
+            else{ //stop listener is there is (case where setting changes)
                 browser.webRequest.onBeforeRequest.removeListener(blockYt)
             }
             
