@@ -43,25 +43,33 @@ function main(){
 		* REDUCTION DU HEADER IONISX
 		*/
 		document.getElementsByClassName("header-second-infos")[0].prepend(document.getElementsByClassName("cursus-header-title")[0])
-	
+		
+		/*
+		* GET ACCESS TO COURSE "BLOCKED"
+		*/
+		Array.prototype.forEach.call(document.getElementsByClassName("course-component-module-disabled"), function(element) {
+			const ref = element.getElementsByClassName("course-component-body")[0].getAttribute("href");
+			const title = element.getElementsByClassName("course-component-module-title")[0];
+			title.innerHTML = `<a href=${ref}>${title.innerText}</a>`
+		});
 		/*
 		* DATES MODULES
 		*/
 		const options = { month: 'short', day: 'numeric'};
-		let coursesList = window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1].replaceAll('-', '_');
+		const coursesList = window.location.href.match(/https:\/\/ionisx\.com\/courses\/[a-z0-9]{24}\/([a-z0-9\-]*)/)[1].replaceAll('-', '_');
 		console.log(coursesList)
 		if(dates[coursesList]){
 			addDates(coursesList)
 		}
 	
 		function addDates(section){
-			for(let k in dates[section]){
-				let module = document.getElementsByClassName("module-number")[k].parentElement;
-				let span = document.createElement("span");
-				let date = dates[section][k];
+			for(const k in dates[section]){
+				const module = document.getElementsByClassName("module-number")[k].parentElement;
+				const span = document.createElement("span");
+				const date = dates[section][k];
 				span.classList.add("dateToDo");
 				span.innerHTML = `${date.start.toLocaleDateString('fr-FR', options)} to ${date.end.toLocaleDateString('fr-FR', options)}`;
-				let today = new Date;
+				const today = new Date;
 				if(module.parentElement.parentElement.classList.contains("course-component-module-finished")){ //done
 					span.classList.add("customDoneWeek")
 				}else{
@@ -84,12 +92,12 @@ function main(){
 	
 	}
 	
-	let inCourse = new RegExp(/https:\/\/courses\.ionisx\.com\/courses\/ref/);
+	const inCourse = new RegExp(/https:\/\/courses\.ionisx\.com\/courses\/ref/);
 	if(inCourse.test(window.location.href)){
 		/*
 		* SHOW SUMMARY ON HOVER
 		*/
-		let summaryButton = document.getElementById('expand-collapse-outline-all-button');
+		const summaryButton = document.getElementById('expand-collapse-outline-all-button');
 		
 	
 		summaryButton.addEventListener('mouseover', function(e){
@@ -101,7 +109,7 @@ function main(){
 	
 	
 		function mouseSummaryButton(e){
-				let hoverSummary = document.getElementById("hover-summary");
+				const hoverSummary = document.getElementById("hover-summary");
 				if(hoverSummary){
 					if(!hoverSummary.classList.contains("activeCust") && e.type == "mouseover"){
 						hoverSummary.classList.add("activeCust");
@@ -109,7 +117,7 @@ function main(){
 						hoverSummary.classList.remove("activeCust");
 					}
 				}else{
-					let div = document.createElement('div');
+					const div = document.createElement('div');
 					div.id = "hover-summary";
 					div.classList.add("activeCust");
 					let summaryList = "<ol>";
@@ -134,11 +142,9 @@ function main(){
 	
 		//fetch summary and getting title, links and complete mark
 		function fetchSummary(){
-			console.log(ionisx_edxlms)
-			console.log(ionisx_sid)
 			//referer cookie fetch
 			return new Promise(function(resolve, reject){
-				let course = window.location.href.match(/https:\/\/courses\.ionisx\.com\/courses\/ref\/(m[0-9]{1,5})\//)[1];
+				const course = window.location.href.match(/https:\/\/courses\.ionisx\.com\/courses\/ref\/(m[0-9]{1,5})\//)[1];
 				fetch(`https://courses.ionisx.com/courses/ref/${course}/x/course/`, {
 					"headers": {
 						"Cookie": `ionisx-sid=${ionisx_sid}; ionisx.edxlms="${ionisx_edxlms}"`
@@ -146,7 +152,7 @@ function main(){
 				}) .then(res => res.text())
 				.then (res2 => {
 						
-					let res3 = res2.replace(/(\r\n|\n|\r)/gm," ");
+					const res3 = res2.replace(/(\r\n|\n|\r)/gm," ");
 					let response = [];
 	
 					if(/You must be enrolled in the course to see course content/.test(res3)){
@@ -156,9 +162,9 @@ function main(){
 							link: ""
 						})
 					}else{
-						let titleRegex = /<h4 class="subsection-title">[\s]*(.*?)[\s]*<\/h4>.*?(<span class="complete-checkmark fa fa-check"><\/span>|div).*?(https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*)/g
+						const titleRegex = /<h4 class="subsection-title">[\s]*(.*?)[\s]*<\/h4>.*?(<span class="complete-checkmark fa fa-check"><\/span>|div).*?(https:\/\/courses\.ionisx\.com\/courses[a-z0-9\/_:]*)/g
 				
-						let datas = [...res3.matchAll(titleRegex)];
+						const datas = [...res3.matchAll(titleRegex)];
 						datas.forEach(elt => {
 							  response.push({
 								name: elt[1].replace("&#39;", "'"),

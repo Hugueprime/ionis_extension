@@ -4,7 +4,7 @@
 const filter = {
     urls: ["*://www.youtube.com/*"]
 };
-let webRequestFlags = ["blocking"];
+const webRequestFlags = ["blocking"];
 
 
 function blockYoutube (){
@@ -50,10 +50,6 @@ browser.runtime.onMessage.addListener(function(request, sender, sendResponse) {
     switch (request.type) {
         case "reloadVideoPlayer": //message coming from popup that video player state has changed
             blockYoutube ();
-            break;
-    
-        default:
-            break;
     }
     sendResponse({status: true});
 })
