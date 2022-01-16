@@ -78,4 +78,19 @@ var dates = {
         {"start": new Date('2024-01-01'), "end": new Date('2024-01-01')},//Théorie des systèmes linéaires
         {"start": new Date('2024-01-01'), "end": new Date('2024-01-01')},//Résolution par la méthode du pivot de Gauss
     ],
+    "epita_algorithmique_s2_et_s2":[
+        {"start": new Date('2022-01-10'), "end": new Date('2022-01-16')},//Les arbres binaires - Description et terminologie
+        {"start": new Date('2022-01-17'), "end": new Date('2022-01-23')},//Les arbres binaires - Parcours
+        {"start": new Date('2022-01-24'), "end": new Date('2022-01-30')},//Les arbres binaires - Implémentations
+        {"start": new Date('2022-01-31'), "end": new Date('2022-02-06')},//Les arbres généraux
+        {"start": new Date('2022-01-31'), "end": new Date('2022-02-06')},//5 Les arbres généraux - Parcours
+        {"start": new Date('2022-02-07'), "end": new Date('2022-02-13')},//Les arbres généraux - Implémentations
+        {"start": new Date('2022-02-14'), "end": new Date('2022-02-20')},//A.B.R. - Présentation et recherche
+        {"start": new Date('2022-03-14'), "end": new Date('2022-03-20')},//A.B.R. - Ajouts et suppression
+        {"start": new Date('2022-04-04'), "end": new Date('2022-04-10')},//A-V.L. - Rotations et présentation
+        {"start": new Date('2022-04-11'), "end": new Date('2022-04-17')},//10 A-V.L. - Ajout et suppression
+        {"start": new Date('2022-05-02'), "end": new Date('2022-05-08')},//Arbres 2.3.4 : Définition et recherche
+        {"start": new Date('2022-05-02'), "end": new Date('2022-05-08')},//Arbres 2-3-4 : Insertion et suppression
+        {"start": new Date('2024-05-09'), "end": new Date('2024-05-15')},//Arbres 2-3-4 : Implémentations / Arbres bicolores
+    ],
 }
