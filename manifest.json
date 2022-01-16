@@ -5,7 +5,7 @@
     "content_scripts":[
         {
             "matches":[
-                "https://ionisx.com/courses/*",
+                "https://ionisx.com/*",
                 "https://courses.ionisx.com/*"
             ],
             "js": ["global_var.js", "config.js", "dates.js", "content.js"],

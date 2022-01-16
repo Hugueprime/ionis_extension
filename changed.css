@@ -28,7 +28,27 @@
 .course-details{
     margin: 10px 0 !important;
 }
-	
+
+/*
+* REDUCE LEFT MENU
+*/
+
+body .menu-nav h3{
+    margin-top: 5px;
+}
+
+body .menu-nav{
+    margin: 0;
+}
+
+.menu-link{
+    height: 34px !important;
+}
+
+.menu-link{
+    padding: 9px 20px 7px 10px !important;
+}
+
 /*
 * BILAN MODULE FIXED AND LESS MARGIN
 */
