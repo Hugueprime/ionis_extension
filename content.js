@@ -46,7 +46,15 @@ function main(){
 		* REDUCTION DU HEADER IONISX
 		*/
 		document.getElementsByClassName("header-second-infos")[0].prepend(document.getElementsByClassName("cursus-header-title")[0])
-	
+		
+		/*
+		* GET ACCESS TO COURSE "BLOCKED"
+		*/
+		Array.prototype.forEach.call(document.getElementsByClassName("course-component-module-disabled"), function(element) {
+			const ref = element.getElementsByClassName("course-component-body")[0].getAttribute("href");
+			const title = element.getElementsByClassName("course-component-module-title")[0];
+			title.innerHTML = `<a href=${ref}>${title.innerText}</a>`
+		});
 		/*
 		* DATES MODULES
 		*/
