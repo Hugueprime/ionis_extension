@@ -66,12 +66,12 @@ var dates = {
         {"start": new Date('2022-02-14'), "end": new Date('2022-02-20')},//20 Dimension des sous-espaces vectoriels
         {"start": new Date('2022-03-14'), "end": new Date('2022-03-20')},//Définition d’une application linéaire
         {"start": new Date('2022-03-14'), "end": new Date('2022-03-20')},//Exemples d’applications linéaires
-        {"start": new Date('2022-03-28'), "end": new Date('2022-04-03')},//Image et noyau d'une application linéaire
-        {"start": new Date('2022-04-04'), "end": new Date('2022-04-10')},//Définition d’une matrice
-        {"start": new Date('2022-04-04'), "end": new Date('2022-04-10')},//25 Multiplication de matrices
-        {"start": new Date('2022-04-11'), "end": new Date('2022-04-17')},//Matrice d'une application linéaire
-        {"start": new Date('2022-05-02'), "end": new Date('2022-05-08')},//Définition de l'inverse d’une matrice
-        {"start": new Date('2022-05-02'), "end": new Date('2022-05-08')},//Calcul de l’inverse d’une matrice
+        {"start": new Date('2022-03-21'), "end": new Date('2022-04-27')},//Image et noyau d'une application linéaire
+        {"start": new Date('2022-03-28'), "end": new Date('2022-04-03')},//Définition d’une matrice
+        {"start": new Date('2022-03-28'), "end": new Date('2022-04-03')},//25 Multiplication de matrices
+        {"start": new Date('2022-04-04'), "end": new Date('2022-04-10')},//Matrice d'une application linéaire
+        {"start": new Date('2022-04-11'), "end": new Date('2022-05-18')},//Définition de l'inverse d’une matrice
+        {"start": new Date('2022-04-11'), "end": new Date('2022-05-18')},//Calcul de l’inverse d’une matrice
         {"start": new Date('2024-01-01'), "end": new Date('2024-01-01')},//Matrices triangulaires, matrice transposée, trace, matrices symétriques
         {"start": new Date('2024-01-01'), "end": new Date('2024-01-01')},//30 Déterminant d'une matrice carrée - Définition
         {"start": new Date('2024-01-01'), "end": new Date('2024-01-01')},//Introduction aux systèmes linéaires
